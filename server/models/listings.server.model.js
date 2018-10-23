@@ -1,21 +1,26 @@
 /* Import mongoose and define any variables needed to create the schema */
-var mongoose = require('mongoose'), 
+var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 /* Create your schema */
 var listingSchema = new Schema({
-  name: {
-    type: String, 
+  //instructor or ta
+  type: {
+    type: String,
     required: true
-  }, 
-  code: {
-    type: String, 
-    required: true, 
-    unique: true
-  }, 
-  address: String, 
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  //https://stackoverflow.com/questions/19695058/how-to-define-object-in-array-in-mongoose-schema-correctly-with-2d-geo-index refer to for how to push and pop from array
+  dates : {
+    type : Array,
+    "default" : []
+  },
+  address: String,
   coordinates: {
-    latitude: Number, 
+    latitude: Number,
     longitude: Number
   },
   created_at: Date,

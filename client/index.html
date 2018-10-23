@@ -5,9 +5,9 @@
     <link rel="stylesheet" href="styles/main.css">
   </head>
   <body ng-app="directoryApp">
-    
+
     <nav class="navbar navbar-default navbar-fixed-top navbar-dark bg-dark">
-      <a class="navbar-brand" href>        
+      <a class="navbar-brand" href>
         UF OFFICE HOURS
       </a>
       <form class="form-inline">
@@ -32,7 +32,7 @@
                 <th>Courses</th>
               </tr>
               <tr ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
-                <td>{{listing.code}}</td>
+                <td>{{listing.role}}</td>
                 <td>{{listing.name}}</td>
                 <td ng-click="deleteListing($index)"><span style="color: red;" class="glyphicon glyphicon-remove"></span></td>
               </tr>

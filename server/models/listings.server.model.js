@@ -9,20 +9,34 @@ var listingSchema = new Schema({
     type: String,
     required: true
   },
+  email
+  : {
+    type: String,
+    required: true
+  },
   name: {
     type: String,
     required: true
   },
   //https://stackoverflow.com/questions/19695058/how-to-define-object-in-array-in-mongoose-schema-correctly-with-2d-geo-index refer to for how to push and pop from array
-  dates : {
+  office_hours : {
+    type : Array,
+    "default" : []
+  },
+  courses : {
     type : Array,
     "default" : []
   },
   address: String,
+  //I dont think we need coordiantes as long as we can drop pin on address in map
+  /*
   coordinates: {
     latitude: Number,
     longitude: Number
   },
+  */
+  twitter: String,
+  instructor: String, //for if ta
   created_at: Date,
   updated_at: Date
 });

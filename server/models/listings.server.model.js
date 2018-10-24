@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 /* Create your schema */
 var listingSchema = new Schema({
   //instructor or ta
-  type: {
+  role: {
     type: String,
     required: true
   },
@@ -16,7 +16,6 @@ var listingSchema = new Schema({
   },
   name: {
     type: String,
-    required: true
   },
   //https://stackoverflow.com/questions/19695058/how-to-define-object-in-array-in-mongoose-schema-correctly-with-2d-geo-index refer to for how to push and pop from array
   office_hours : {
@@ -28,6 +27,7 @@ var listingSchema = new Schema({
     "default" : []
   },
   address: String,
+  password: String,
   //I dont think we need coordiantes as long as we can drop pin on address in map
   /*
   coordinates: {

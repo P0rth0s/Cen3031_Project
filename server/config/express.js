@@ -4,6 +4,7 @@ var path = require('path'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
     config = require('./config'),
+    path = require("path")
     listingsRouter = require('../routes/listings.server.routes');
 
 module.exports.init = function() {
@@ -27,6 +28,11 @@ module.exports.init = function() {
   /**TODO
   Use the listings router for requests to the api */
   app.use('/api/listings', listingsRouter);
+
+
+  app.get("/register", function(req, res) {
+    res.sendFile(path.join(__dirname+'/../../client/register.html'));
+  });
 
 
 /*Go to homepage for all routes not specified */

@@ -1,6 +1,7 @@
 
 /* Dependencies */
 var mongoose = require('mongoose'),
+    bcrypt = require('bcrypt'),
     Listing = require('../models/listings.server.model.js');
 
 /*
@@ -18,6 +19,9 @@ exports.create = function(req, res) {
   /* Instantiate a Listing */
   var listing = new Listing(req.body);
 
+  /* Hash password */
+  const salt = bcrypt.genSaltSync();
+  listing.password = bcrypt.hashSync(listing.password, salt);
 
   /* Then save the listing */
   listing.save(function(err) {
@@ -55,7 +59,7 @@ exports.delete = function(req, res) {
 
 /* Retreive all the directory listings, sorted alphabetically by listing code */
 exports.list = function(req, res) {
-  Listing.find({}, "type name address", function(err, listing) {
+  Listing.find({}, "role email name office_hours courses address twitter instructor", function(err, listing) {
    if(err) {
      console.log(err);
    }

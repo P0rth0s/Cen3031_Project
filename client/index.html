@@ -11,9 +11,9 @@
         UF OFFICE HOURS
       </a>
       <form class="form-inline">
-        <input class="form-control mr-sm-2" type="text" placeholder="Username" name="username">
-        <input class="form-control mr-sm-2" type="text" placeholder="Password" name="psw">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Login</button>
+        <input class="form-control mr-sm-2" type="text" placeholder="Username" name="username"  ng-model="listing.username">
+        <input class="form-control mr-sm-2" type="text" placeholder="Password" name="psw"  ng-model="listing.password">
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit" ng-click="login()">Login</button>
       </form>
     </nav>
 

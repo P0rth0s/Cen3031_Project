@@ -11,24 +11,17 @@
         UF OFFICE HOURS
       </a>
       <form class="form-inline">
-        <input class="form-control mr-sm-2" type="text" placeholder="Username" name="username"  ng-model="listing.username">
-        <input class="form-control mr-sm-2" type="text" placeholder="Password" name="psw"  ng-model="listing.password">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit" ng-click="login()">Login</button>
+        <input class="form-control mr-sm-2" type="text" placeholder="Username" name="username">
+        <input class="form-control mr-sm-2" type="text" placeholder="Password" name="psw">
+        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Login</button>
       </form>
     </nav>
 
     <div class="container">
       <div class="row justify-content-md-left" ng-controller="ListingsController">
         <div class="col-md-6">
-          <form novalidate class="simple-form">
-            <h2>Create Account</h2>
-            Email: <input type="text" ng-model="newListing.email" /><br />
-            Name: <input type="text" ng-model="newListing.name" /><br />
-            Role: <input type="text" ng-model="newListing.role" /><br />
-            Instructor email if TA: <input type="text" ng-model="newListing.instructor" /><br />
-            Password: <input type="text" ng-model="newListing.password" /><br />
-            <button class="btn btn-primary" ng-click="addListing()">Add Listing</button>
-          </form>
+          This will be profile page. Allow editing of info for this account.
+          Can only be accessed by logged in user.
         </div>
       </div>
     </div>

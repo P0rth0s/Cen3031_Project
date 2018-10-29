@@ -3,7 +3,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     /* Get all the listings, then bind it to the scope */
     Listings.getAll().then(function(response) {
       $scope.listings = response.data;
-      console.log("response.data: " + response.data);
+      //console.log("response.data: " + response.data);
     }, function(error) {
       console.log('Unable to retrieve listings:', error);
     });
@@ -17,12 +17,25 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
 	 */
 
      Listings.create($scope.newListing).then(function(res) {
-       res.redirect('/');
+       //res.redirect('/');
+       console.log(res);
+       console.log('token:' + res.token);
      }, function(error) {
-       res.redirect('/'); //TODO create error page
+       //res.redirect('/'); //TODO create error page
        console.log('Unable to create listing: ', error);
      });
   };
+
+    //check if password is valid.
+    /*
+    $scope.login = function() {
+      if(Listings.isValidPassword($scope.listing.email, $scope.listing.password)) {
+        console.log('password match');
+      } else {
+        console.log('password error');
+      }
+    };
+    */
 
     $scope.deleteListing = function(index) {
 	   /**TODO

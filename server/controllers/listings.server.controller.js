@@ -1,8 +1,11 @@
 
 /* Dependencies */
 var mongoose = require('mongoose'),
-    bcrypt = require('bcrypt'),
+    crypto = require('crypto'),
+    jwt = require('jsonwebtoken'),
     Listing = require('../models/listings.server.model.js');
+
+const SECRET = "CHANGE_THIS_TO_ENV_VAR"
 
 /*
   In this file, you should use Mongoose queries in order to retrieve/add/remove/update listings.
@@ -13,6 +16,55 @@ var mongoose = require('mongoose'),
   from assignment 3 https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
  */
 
+exports.profileRead = function(req, res) {
+  console.log('read profile');
+   // If no user ID exists in the JWT return a 401
+   if (!req.payload._id) {
+     res.status(401).json({
+       "message" : "UnauthorizedError: private profile"
+     });
+   } else {
+     // Otherwise continue
+     Listing
+       .findById(req.payload._id)
+       .exec(function(err, user) {
+         res.status(200).json(user);
+       });
+   }
+
+ };
+
+
+exports.generateJwt = function(listing) {
+
+   console.log('generate JWT');
+
+   var expiry = new Date();
+   expiry.setDate(expiry.getDate() + 7);
+   return jwt.sign({
+     _id: listing._id,
+     email: listing.email,
+     name: listing.name,
+     exp: parseInt(expiry.getTime() / 1000),
+   }, SECRET); // DO NOT KEEP YOUR SECRET IN THE CODE!
+ };
+
+
+exports.isValidPassword = function(email, password) {
+  Listing.findOne({email: email}, function(err, listing) {
+    if (err) {
+      console.log(err);
+    } else {
+       var hash = crypto.pbkdf2Sync(password, listing.salt, 1000, 64, 'sha512').toString('hex');
+       if(hash == listing.hash) {
+         return true;
+       } else {
+         return false;
+       }
+    }
+  });
+}
+
 /* Create a listing */
 exports.create = function(req, res) {
 
@@ -20,8 +72,9 @@ exports.create = function(req, res) {
   var listing = new Listing(req.body);
 
   /* Hash password */
-  const salt = bcrypt.genSaltSync();
-  listing.password = bcrypt.hashSync(listing.password, salt);
+  var salt = crypto.randomBytes(16).toString('hex');
+  listing.salt = salt;
+  listing.password = crypto.pbkdf2Sync(listing.password, salt, 1000, 64, 'sha512').toString('hex');
 
   /* Then save the listing */
   listing.save(function(err) {
@@ -29,7 +82,12 @@ exports.create = function(req, res) {
       console.log(err);
       res.status(400).send(err);
     } else {
-      res.json(listing);
+      var token = exports.generateJwt(listing);
+      res.status(200);
+      res.json({"token": token});
+      res.end();
+      //console.log(res.token);
+      //res.redirect('/dashboard')
     }
   });
 };

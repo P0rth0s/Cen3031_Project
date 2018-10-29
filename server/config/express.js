@@ -3,9 +3,20 @@ var path = require('path'),
     mongoose = require('mongoose'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
+    cookieParser = require('cookie-parser'),
+    session = require('express-session'),
     config = require('./config'),
-    path = require("path")
+    path = require("path"),
+    passport = require("passport"),
+    jwt = require('express-jwt'),
+    ctrlProfile = require('../controllers/listings.server.controller.js'),
     listingsRouter = require('../routes/listings.server.routes');
+
+const SECRET = "CHANGE_THIS_TO_ENV_VAR"
+    var auth = jwt({
+      secret: SECRET,
+      userProperty: 'payload'
+    });
 
 module.exports.init = function() {
   //connect to database
@@ -20,20 +31,25 @@ module.exports.init = function() {
   //body parsing middleware
   app.use(bodyParser.json());
 
+  // initialize cookie-parser to allow us access the cookies stored in the browser.
+  app.use(cookieParser());
 
-  /**TODO
-  Serve static files */
+  app.use(passport.initialize());
+
   app.use(express.static('client'));
 
-  /**TODO
-  Use the listings router for requests to the api */
   app.use('/api/listings', listingsRouter);
 
+  app.get('/dashboard', auth, ctrlProfile.profileRead);
+  /*
+  app.get("/dashboard", function(req, res) {
+    res.sendFile(path.join(__dirname+'/../../client/dashboard.html'));
+  });
+*/
 
   app.get("/register", function(req, res) {
     res.sendFile(path.join(__dirname+'/../../client/register.html'));
   });
-
 
 /*Go to homepage for all routes not specified */
   app.get("*", function(req, res) {

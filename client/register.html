@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html>
+  <title>UF Office Hours</title>
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/register.css">
   </head>
   <body ng-app="directoryApp">
 
-    <nav class="navbar navbar-default navbar-fixed-top navbar-dark bg-dark">
-      <a class="navbar-brand" href>
-        UF OFFICE HOURS
-      </a>
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" type="text" placeholder="Username" name="username">
-        <input class="form-control mr-sm-2" type="text" placeholder="Password" name="psw">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Login</button>
+    <div class="loginbox">
+      <h1>Login</h1>
+      <form>
+        <p>Email</p>
+        <input type="text" name="" placeholder="Enter Email">
+        <p>Password</p>
+        <input type="password" name="" placeholder="Enter Password">
+        <input type="submit" name="" value="Login">
       </form>
-    </nav>
-
-    <div class="container">
-      <div class="row justify-content-md-left" ng-controller="ListingsController">
-        <div class="col-md-6">
-          <form novalidate class="simple-form">
-            <h2>Create Account</h2>
-            Email: <input type="text" ng-model="newListing.email" /><br />
-            Role: <input type="text" ng-model="newListing.role" /><br />
-            Instructor email if TA: <input type="text" ng-model="newListing.instructor" /><br />
-            Password: <input type="text" ng-model="newListing.password" /><br />
-            <button class="btn btn-primary" ng-click="addListing()">Add Listing</button>
-          </form>
-        </div>
-      </div>
     </div>
+
+    <div class="signupbox">
+      <h2>Signup</h2>
+        <form>
+          <p>Email</p>
+          <input type="text" placeholder="Enter Email" ng-model="newListing.email" /><br />
+          <p>Role</p>
+          <input type="text" placeholder="Enter Role" ng-model="newListing.role" /><br />
+          <p>Professor's Email if TA</p>
+          <input type="text" placeholder="Enter Email" ng-model="newListing.instructor" /><br />
+          <p>Password</p>
+          <input type="text" placeholder="Enter Password" ng-model="newListing.password" /><br />
+          <input type="submit" name="" value="Signup" ng-click="addListing()">
+        </form>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
     <script src="https://code.angularjs.org/1.4.3/angular.js"></script>

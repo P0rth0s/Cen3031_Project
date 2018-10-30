@@ -36,9 +36,9 @@ module.exports.init = function() {
 
   app.use(passport.initialize());
 
-  app.use(express.static('client'));
-
   app.use('/api/listings', listingsRouter);
+
+  app.use(express.static('client'));
 
   app.get('/dashboard', auth, ctrlProfile.profileRead);
   /*

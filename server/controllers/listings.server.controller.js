@@ -84,10 +84,9 @@ exports.create = function(req, res) {
     } else {
       var token = exports.generateJwt(listing);
       res.status(200);
-      res.json({"token": token});
-      res.end();
-      //console.log(res.token);
-      //res.redirect('/dashboard')
+      res.setHeader('Set-Cookie','token');
+      res.cookie('token', token, { expires: new Date(Date.now() + 9000000), httpOnly: false });
+      return res.json({"token": token});
     }
   });
 };

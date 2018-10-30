@@ -18,8 +18,8 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
 
      Listings.create($scope.newListing).then(function(res) {
        //res.redirect('/');
-       console.log(res);
-       console.log('token:' + res.token);
+       //console.log('token:' + res.data.token);
+       //$cookies.put('token', res.data.token);
      }, function(error) {
        //res.redirect('/'); //TODO create error page
        console.log('Unable to create listing: ', error);

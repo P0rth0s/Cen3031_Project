@@ -17,25 +17,20 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
 	 */
 
      Listings.create($scope.newListing).then(function(res) {
-       //res.redirect('/');
-       //console.log('token:' + res.data.token);
-       //$cookies.put('token', res.data.token);
      }, function(error) {
-       //res.redirect('/'); //TODO create error page
        console.log('Unable to create listing: ', error);
      });
   };
 
     //check if password is valid.
-    /*
     $scope.login = function() {
-      if(Listings.isValidPassword($scope.listing.email, $scope.listing.password)) {
-        console.log('password match');
-      } else {
-        console.log('password error');
-      }
+      console.log('login');
+      Listings.login($scope.login_listing).then(function(res) {
+      }, function(error) {
+        console.log('Unable to login: ', error);
+      });
     };
-    */
+
 
     $scope.deleteListing = function(index) {
 	   /**TODO

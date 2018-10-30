@@ -50,16 +50,21 @@ exports.generateJwt = function(listing) {
  };
 
 
-exports.isValidPassword = function(email, password) {
-  Listing.findOne({email: email}, function(err, listing) {
+exports.login = function(req, res) {
+  var login_listing = newListing(req.body);
+  Listing.findOne({email: login_listing.email}, function(err, listing) {
     if (err) {
       console.log(err);
     } else {
-       var hash = crypto.pbkdf2Sync(password, listing.salt, 1000, 64, 'sha512').toString('hex');
+       var hash = crypto.pbkdf2Sync(login_listing.password, listing.salt, 1000, 64, 'sha512').toString('hex');
        if(hash == listing.hash) {
-         return true;
+         var token = exports.generateJwt(listing);
+         res.status(200);
+         res.setHeader('Set-Cookie','token');
+         res.cookie('token', token, { expires: new Date(Date.now() + 9000000), httpOnly: false });
+         return res.json({"token": token})
        } else {
-         return false;
+         res.send("There was an error during login. Your password our username was invalid");
        }
     }
   });

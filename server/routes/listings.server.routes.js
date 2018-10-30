@@ -1,8 +1,7 @@
 /* Dependencies */
 var listings = require('../controllers/listings.server.controller.js'),
     express = require('express'),
-    router = express.Router(),
-    ctrlProfile = require('../controllers/listings.server.controller.js');
+    router = express.Router();
 
 const SECRET = "CHANGE_THIS_TO_ENV_VAR"
 var jwt = require('express-jwt');
@@ -27,8 +26,6 @@ router.route('/:listingId')
   .get(listings.read)
   .put(listings.update)
   .delete(listings.delete);
-
-router.get('/dashboard', auth, ctrlProfile.profileRead);
 
 /*
   The 'router.param' method allows us to specify middleware we would like to use to handle

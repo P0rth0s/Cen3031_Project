@@ -9,7 +9,7 @@ var path = require('path'),
     path = require("path"),
     passport = require("passport"),
     jwt = require('express-jwt'),
-    ctrlProfile = require('../controllers/listings.server.controller.js'),
+    authenticationRouter= require('../routes/authentication.server.routes'),
     listingsRouter = require('../routes/listings.server.routes');
 
 const SECRET = "CHANGE_THIS_TO_ENV_VAR"
@@ -38,14 +38,16 @@ module.exports.init = function() {
 
   app.use('/api/listings', listingsRouter);
 
+  app.use('/protected', authenticationRouter);
+
   app.use(express.static('client'));
 
-  app.get('/dashboard', auth, ctrlProfile.profileRead);
-  /*
-  app.get("/dashboard", function(req, res) {
+  //app.get('/dashboard', auth, ctrlProfile.profileRead);
+
+  app.get("/protected/dashboard", function(req, res) {
     res.sendFile(path.join(__dirname+'/../../client/dashboard.html'));
   });
-*/
+
 
   app.get("/register", function(req, res) {
     res.sendFile(path.join(__dirname+'/../../client/register.html'));

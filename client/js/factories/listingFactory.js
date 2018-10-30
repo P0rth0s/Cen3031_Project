@@ -10,6 +10,10 @@ angular.module('listings', []).factory('Listings', function($http) {
 
     delete: function(id) {
       return $http.post('http://localhost:8080/api/listings', id);
+    },
+
+    login: function(login_listing) {
+      return $http.post('http://localhost:8080/api/listings', login_listing);
     }
   };
 

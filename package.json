@@ -1,5 +1,5 @@
 {
-  "name": "CEN3031 Project",
+  "name": "cen3031-project",
   "version": "1.0.0",
   "description": "Office Hours website",
   "main": "server.js",

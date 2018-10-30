@@ -27,6 +27,8 @@ router.route('/:listingId')
   .put(listings.update)
   .delete(listings.delete);
 
+router.route('/login')
+  .post(listings.login);
 /*
   The 'router.param' method allows us to specify middleware we would like to use to handle
   requests with a parameter.

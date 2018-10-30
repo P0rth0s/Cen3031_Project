@@ -15,7 +15,6 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
 	  *Save the article using the Listings factory. If the object is successfully
 	  saved redirect back to the list page. Otherwise, display the error
 	 */
-
      Listings.create($scope.newListing).then(function(res) {
      }, function(error) {
        console.log('Unable to create listing: ', error);
@@ -24,7 +23,6 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
 
     //check if password is valid.
     $scope.login = function() {
-      console.log('login');
       Listings.login($scope.login_listing).then(function(res) {
       }, function(error) {
         console.log('Unable to login: ', error);

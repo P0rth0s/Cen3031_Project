@@ -16,24 +16,6 @@ const SECRET = "CHANGE_THIS_TO_ENV_VAR"
   from assignment 3 https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
  */
 
-exports.profileRead = function(req, res) {
-  console.log('read profile');
-   // If no user ID exists in the JWT return a 401
-   if (!req.payload._id) {
-     res.status(401).json({
-       "message" : "UnauthorizedError: private profile"
-     });
-   } else {
-     // Otherwise continue
-     Listing
-       .findById(req.payload._id)
-       .exec(function(err, user) {
-         res.status(200).json(user);
-       });
-   }
-
- };
-
 
 exports.generateJwt = function(listing) {
 
@@ -51,8 +33,9 @@ exports.generateJwt = function(listing) {
 
 
 exports.login = function(req, res) {
-  var login_listing = newListing(req.body);
+  var login_listing = new Listing(req.body);
   Listing.findOne({email: login_listing.email}, function(err, listing) {
+    console.log('here')
     if (err) {
       console.log(err);
     } else {
@@ -64,7 +47,7 @@ exports.login = function(req, res) {
          res.cookie('token', token, { expires: new Date(Date.now() + 9000000), httpOnly: false });
          return res.json({"token": token})
        } else {
-         res.send("There was an error during login. Your password our username was invalid");
+         return res.send("There was an error during login. Your password our username was invalid");
        }
     }
   });

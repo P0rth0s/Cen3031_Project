@@ -10,6 +10,7 @@ var path = require('path'),
     passport = require("passport"),
     jwt = require('express-jwt'),
     authenticationRouter= require('../routes/authentication.server.routes'),
+    privRouter= require('../routes/privilege.server.routes'),
     listingsRouter = require('../routes/listings.server.routes');
 
 const SECRET = "CHANGE_THIS_TO_ENV_VAR"
@@ -40,6 +41,8 @@ module.exports.init = function() {
 
   app.use('/protected', authenticationRouter);
 
+  app.use('/priv', privRouter);
+
   app.use(express.static('client'));
 
   //app.get('/dashboard', auth, ctrlProfile.profileRead);
@@ -49,8 +52,8 @@ module.exports.init = function() {
   });
 
 
-  app.get("/register", function(req, res) {
-    res.sendFile(path.join(__dirname+'/../../client/register.html'));
+  app.get("/protected/priv/upload", function(req, res) {
+    res.sendFile(path.join(__dirname+'/../../client/upload.html'));
   });
 
 /*Go to homepage for all routes not specified */

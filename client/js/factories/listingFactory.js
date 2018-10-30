@@ -13,7 +13,7 @@ angular.module('listings', []).factory('Listings', function($http) {
     },
 
     login: function(login_listing) {
-      return $http.post('http://localhost:8080/api/listings', login_listing);
+      return $http.post('http://localhost:8080/api/listings/login', login_listing);
     }
   };
 

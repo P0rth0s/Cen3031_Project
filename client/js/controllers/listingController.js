@@ -3,7 +3,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     /* Get all the listings, then bind it to the scope */
     Listings.getAll().then(function(response) {
       $scope.listings = response.data;
-      console.log("response.data: " + response.data);
+      //console.log("response.data: " + response.data);
     }, function(error) {
       console.log('Unable to retrieve listings:', error);
     });
@@ -15,14 +15,20 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
 	  *Save the article using the Listings factory. If the object is successfully
 	  saved redirect back to the list page. Otherwise, display the error
 	 */
-
      Listings.create($scope.newListing).then(function(res) {
-       res.redirect('/');
      }, function(error) {
-       res.redirect('/'); //TODO create error page
        console.log('Unable to create listing: ', error);
      });
   };
+
+    //check if password is valid.
+    $scope.login = function() {
+      Listings.login($scope.login_listing).then(function(res) {
+      }, function(error) {
+        console.log('Unable to login: ', error);
+      });
+    };
+
 
     $scope.deleteListing = function(index) {
 	   /**TODO

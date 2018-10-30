@@ -17,7 +17,6 @@ var listingSchema = new Schema({
   name: {
     type: String,
   },
-  //https://stackoverflow.com/questions/19695058/how-to-define-object-in-array-in-mongoose-schema-correctly-with-2d-geo-index refer to for how to push and pop from array
   office_hours : {
     type : Array,
     "default" : []
@@ -28,6 +27,7 @@ var listingSchema = new Schema({
   },
   address: String,
   password: String,
+  salt: String,
   //I dont think we need coordiantes as long as we can drop pin on address in map
   /*
   coordinates: {

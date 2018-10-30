@@ -2,6 +2,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/main.css">
   </head>
   <body ng-app="directoryApp">
@@ -30,11 +31,29 @@
                 <th>Role</th>
                 <th>Name</th>
                 <th>Courses</th>
+                <th>Social Media</th>
               </tr>
-              <tr ng-repeat="listing in listings | filter: query" ng-click="showDetails($index)">
-                <td>{{listing.role}}</td>
-                <td>{{listing.name}}</td>
-                <td>{{listing.courses}}</td>
+              <tr ng-repeat="listing in listings | filter: query">
+                <td ng-click="showDetails($index)">{{listing.role}}</td>
+                <td ng-click="showDetails($index)">{{listing.name}}</td>
+                <td ng-click="showDetails($index)">{{listing.courses}}</td>
+                <td ng-if="listing.socialMedia">
+                  <div ng-if="listing.socialMedia.twitter">
+                    <a href="{{listing.socialMedia.twitter}}">
+                        <i class="fa fa-twitter" aria-hidden="true" style="color:#43b8ff"></i>
+                        Twitter
+                    </a>
+                  </div>
+                  <div ng-if="listing.socialMedia.website">
+                    <a href="{{listing.socialMedia.website}}">
+                      Website
+                    </a>
+                  </div>
+                  <div ng-if="listing.socialMedia.slack">
+                    <i class="fa fa-slack" aria-hidden="true" style="color:#43b8ff"></i>
+                    @{{listing.socialMedia.slack}}
+                  </div>
+                </td>
                 <td ng-click="deleteListing($index)"><span style="color: red;" class="glyphicon glyphicon-remove"></span></td>
               </tr>
             </table>

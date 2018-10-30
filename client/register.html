@@ -22,10 +22,16 @@
         <div class="col-md-6">
           <form novalidate class="simple-form">
             <h2>Create Account</h2>
+            Name: <input type="text" ng-model="newListing.name" /><br />
             Email: <input type="text" ng-model="newListing.email" /><br />
             Role: <input type="text" ng-model="newListing.role" /><br />
-            Instructor email if TA: <input type="text" ng-model="newListing.instructor" /><br />
-            Password: <input type="text" ng-model="newListing.password" /><br />
+            <div ng-if="newListing.role === 'Instructor'">
+                Instructor email: <input type="text" ng-model="newListing.instructor" /><br />
+            </div>
+            Twitter: <input type="text" ng-model="newListing.socialMedia.twitter" /><br />
+            Website: <input type="text" ng-model="newListing.socialMedia.website" /><br />
+            Slack: <input type="text" ng-model="newListing.socialMedia.slack" /><br />
+            Password: <input type="password" ng-model="newListing.password" /><br />
             <button class="btn btn-primary" ng-click="addListing()">Add Listing</button>
           </form>
         </div>

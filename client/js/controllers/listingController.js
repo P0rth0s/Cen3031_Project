@@ -1,3 +1,5 @@
+//var request = require('request');
+
 angular.module('listings').controller('ListingsController', ['$scope', 'Listings',
   function($scope, Listings) {
     /* Get all the listings, then bind it to the scope */
@@ -24,6 +26,7 @@ angular.module('listings').controller('ListingsController', ['$scope', 'Listings
     //check if password is valid.
     $scope.login = function() {
       Listings.login($scope.login_listing).then(function(res) {
+
       }, function(error) {
         console.log('Unable to login: ', error);
       });

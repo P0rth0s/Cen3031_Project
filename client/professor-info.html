@@ -38,18 +38,18 @@
       <div class="row" ng-repeat="row in officeHours" ng-init="hoursIndex = $index">
         <div class="form-group mr-4">
           <label for="officeHoursBeginInput">Office hours begin</label>
-          <select class="form-control" id="officeHoursBeginInput" ng-model="officeHours[hoursIndex].begin">
+          <select class="form-control" id="officeHoursBeginInput" ng-model="row.begin">
             <option ng-repeat="option in UFPeriods">{{option.period}} - {{option.beginTime}}</option>
           </select>
         </div>
         <div class="form-group mr-4">
           <label for="officeHoursEndInput">Office hours end</label>
-          <select class="form-control" id="officeHoursEndInput" ng-model="officeHours[$index].end">
+          <select class="form-control" id="officeHoursEndInput" ng-model="row.end">
             <option ng-repeat="option in UFPeriods">{{option.period}} - {{option.endTime}}</option>
           </select>
         </div>
         <div>
-          <button type="button" class="btn btn-info btn-block" ng-if="!$first" ng-click="removeHoursInput(hoursIndex)">
+          <button type="button" class="btn btn-info btn-block" ng-if="!$first" ng-click="removeHoursInput(row)">
             Remove this hours</button>
         </div>
       </div>
@@ -58,17 +58,43 @@
 
       <!-- Courses input -->
       <div class="row" ng-repeat="row in courses" ng-init="coursesIndex = $index">
-        <div class="form-group">
+        <div class="form-group mr-4">
           <label for="courseInput">Course Title</label>
-          <input type="text" class="form-control" id="courseInput" ng-model="courses[coursesIndex]">
+          <input type="text" class="form-control" id="courseInput" ng-model="row.title" ng-model-options="{ updateOn: 'blur'}">
+        </div>
+        <div class="form-group mr-4">
+          <label for="courseSemester">Semester</label>
+          <select class="form-control" id="courseSemester" ng-model="row.time">
+            <option ng-repeat="option in semesters">{{option}}</option>
+          </select>
         </div>
         <div>
-          <button type="button" class="btn btn-info btn-block" ng-if="!$first" ng-click="removeCourseInput(coursesIndex)">
+          <button type="button" class="btn btn-info btn-block" ng-if="!$first" ng-click="removeCourseInput(row)">
             Remove this course</button>
         </div>
       </div>
-      <button type="button" class="btn btn-info" ng-click="addCourseInput()">Add more hours</button>
+      <button type="button" class="btn btn-info" ng-click="addCourseInput()">Add more courses</button>
       <button type="button" class="btn btn-info" ng-click="log(courses)">Log courses</button>
+
+      <!-- Social Media input -->
+      <div class="row" ng-repeat="row in social" ng-init="coursesIndex = $index">
+        <div class="form-group mr-4">
+          <label for="courseInput">Social Media Link</label>
+          <input type="text" class="form-control" id="courseInput" ng-model="row.link" ng-model-options="{ updateOn: 'blur'}">
+        </div>
+        <div class="form-group mr-4">
+          <label for="courseSemester">Website</label>
+          <select class="form-control" id="courseSemester" ng-model="row.type">
+            <option ng-repeat="option in socialOptions">{{option}}</option>
+          </select>
+        </div>
+        <div>
+          <button type="button" class="btn btn-info btn-block" ng-if="!$first" ng-click="removeSocialInput(row)">
+            Remove this social</button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-info" ng-click="addSocialInput()">Add more socials</button>
+      <button type="button" class="btn btn-info" ng-click="log(social)">Log courses</button>
     </form>
   </div>
 </body>

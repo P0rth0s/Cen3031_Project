@@ -1,8 +1,7 @@
 angular.module("directoryApp").controller("ProfessorInfoController", [
   "$scope",
   function($scope) {
-    $scope.officeHours = [{ begin: "", end: "" }];
-    $scope.courses = [""];
+    $scope.officeHours = [null];
     $scope.UFPeriods = [
       {
         period: "1",
@@ -75,21 +74,60 @@ angular.module("directoryApp").controller("ProfessorInfoController", [
         endTime: "10:10"
       }
     ];
+    $scope.courses = [null];
+    $scope.semesters = ["fall", "spring", "summer"];
+    $scope.social = [null];
+    $scope.socialOptions = ["facebook", "twitter"];
 
     $scope.addHoursInput = function() {
       $scope.officeHours.push({ begin: "", end: "" });
     };
 
-    $scope.removeHoursInput = function(index) {
-      $scope.officeHours.splice(index, 1);
+    $scope.removeHoursInput = function(item) {
+      let i = $scope.officeHours.findIndex((x, index) => {
+        if (item.begin === x.begin && item.end === x.end) {
+          return true;
+        }
+        return false;
+      });
+
+      if (i + 1) {
+        $scope.officeHours.splice(i, 1);
+      }
     };
 
     $scope.addCourseInput = function() {
-      $scope.courses.push({ begin: "", end: "" });
+      $scope.courses.push({ title: "", semester: "" });
     };
 
-    $scope.removeCourseInput = function(index) {
-      $scope.courses.splice(index, 1);
+    $scope.removeCourseInput = function(item) {
+      let i = $scope.courses.findIndex((x, index) => {
+        if (item.title === x.title && item.end === x.end) {
+          return true;
+        }
+        return false;
+      });
+
+      if (i + 1) {
+        $scope.courses.splice(i, 1);
+      }
+    };
+
+    $scope.addSocialInput = function() {
+      $scope.social.push({ link: "", type: "" });
+    };
+
+    $scope.removeSocialInput = function(item) {
+      let i = $scope.social.findIndex((x, index) => {
+        if (item.link === x.link && item.type === x.type) {
+          return true;
+        }
+        return false;
+      });
+
+      if (i + 1) {
+        $scope.social.splice(i, 1);
+      }
     };
 
     $scope.log = x => {

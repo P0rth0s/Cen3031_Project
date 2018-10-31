@@ -1,23 +1,23 @@
-var path = require('path'),
-    express = require('express'),
-    mongoose = require('mongoose'),
-    morgan = require('morgan'),
-    bodyParser = require('body-parser'),
-    cookieParser = require('cookie-parser'),
-    session = require('express-session'),
-    config = require('./config'),
-    path = require("path"),
-    passport = require("passport"),
-    jwt = require('express-jwt'),
-    authenticationRouter= require('../routes/authentication.server.routes'),
-    privRouter= require('../routes/privilege.server.routes'),
-    listingsRouter = require('../routes/listings.server.routes');
+var path = require("path"),
+  express = require("express"),
+  mongoose = require("mongoose"),
+  morgan = require("morgan"),
+  bodyParser = require("body-parser"),
+  cookieParser = require("cookie-parser"),
+  session = require("express-session"),
+  config = require("./config"),
+  path = require("path"),
+  passport = require("passport"),
+  jwt = require("express-jwt"),
+  authenticationRouter = require("../routes/authentication.server.routes"),
+  privRouter = require("../routes/privilege.server.routes"),
+  listingsRouter = require("../routes/listings.server.routes");
 
-const SECRET = "CHANGE_THIS_TO_ENV_VAR"
-    var auth = jwt({
-      secret: SECRET,
-      userProperty: 'payload'
-    });
+const SECRET = "CHANGE_THIS_TO_ENV_VAR";
+var auth = jwt({
+  secret: SECRET,
+  userProperty: "payload"
+});
 
 module.exports.init = function() {
   //connect to database
@@ -27,7 +27,7 @@ module.exports.init = function() {
   var app = express();
 
   //enable request logging for development debugging
-  app.use(morgan('dev'));
+  app.use(morgan("dev"));
 
   //body parsing middleware
   app.use(bodyParser.json());
@@ -37,28 +37,31 @@ module.exports.init = function() {
 
   app.use(passport.initialize());
 
-  app.use('/api/listings', listingsRouter);
+  app.use("/api/listings", listingsRouter);
 
-  app.use('/protected', authenticationRouter);
+  app.use("/protected", authenticationRouter);
 
-  app.use('/priv', privRouter);
+  app.use("/priv", privRouter);
 
-  app.use(express.static('client'));
+  app.use(express.static("client"));
 
   //app.get('/dashboard', auth, ctrlProfile.profileRead);
 
   app.get("/protected/dashboard", function(req, res) {
-    res.sendFile(path.join(__dirname+'/../../client/dashboard.html'));
+    res.sendFile(path.join(__dirname + "/../../client/dashboard.html"));
   });
-
 
   app.get("/protected/priv/upload", function(req, res) {
-    res.sendFile(path.join(__dirname+'/../../client/upload.html'));
+    res.sendFile(path.join(__dirname + "/../../client/upload.html"));
   });
 
-/*Go to homepage for all routes not specified */
+  app.get("/test", function(req, res) {
+    res.sendFile(path.join(__dirname + "/../../client/professor-info.html"));
+  });
+
+  /*Go to homepage for all routes not specified */
   app.get("*", function(req, res) {
-    res.redirect('/');
+    res.redirect("/");
   });
 
   return app;

@@ -35,12 +35,11 @@ exports.generateJwt = function(listing) {
 exports.login = function(req, res) {
   var login_listing = new Listing(req.body);
   Listing.findOne({email: login_listing.email}, function(err, listing) {
-    console.log('here')
     if (err) {
       console.log(err);
     } else {
        var hash = crypto.pbkdf2Sync(login_listing.password, listing.salt, 1000, 64, 'sha512').toString('hex');
-       if(hash == listing.hash) {
+       if(hash == listing.password) {
          var token = exports.generateJwt(listing);
          res.status(200);
          res.setHeader('Set-Cookie','token');

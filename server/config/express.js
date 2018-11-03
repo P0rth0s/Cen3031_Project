@@ -59,6 +59,15 @@ module.exports.init = function() {
     res.sendFile(path.join(__dirname + "/../../client/professor-info.html"));
   });
 
+  app.get("/", function(req, res) {
+    var token = req.cookies.token;
+    if(token == undefined) {
+      res.sendFile(path.join(__dirname + "/../../client/login.html"));
+    } else {
+      res.redirect('/protected/dashboard');
+    }
+  });
+
   /*Go to homepage for all routes not specified */
   app.get("*", function(req, res) {
     res.redirect("/");

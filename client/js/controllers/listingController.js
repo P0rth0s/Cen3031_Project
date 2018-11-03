@@ -1,3 +1,5 @@
+const dash_addr = 'http://localhost:8080/protected/dashboard'
+
 angular.module("listings").controller("ListingsController", [
   "$scope",
   "Listings",
@@ -21,7 +23,9 @@ angular.module("listings").controller("ListingsController", [
 	  saved redirect back to the list page. Otherwise, display the error
 	 */
       Listings.create($scope.newListing).then(
-        function(res) {},
+        function(res) {
+          window.location.replace(dash_addr);
+        },
         function(error) {
           console.log("Unable to create listing: ", error);
         }
@@ -31,7 +35,9 @@ angular.module("listings").controller("ListingsController", [
     //check if password is valid.
     $scope.login = function() {
       Listings.login($scope.login_listing).then(
-        function(res) {},
+        function(res) {
+          window.location.replace(dash_addr);
+        },
         function(error) {
           console.log("Unable to login: ", error);
         }

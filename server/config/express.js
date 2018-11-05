@@ -4,10 +4,8 @@ var path = require("path"),
   morgan = require("morgan"),
   bodyParser = require("body-parser"),
   cookieParser = require("cookie-parser"),
-  session = require("express-session"),
   config = require("./config"),
   path = require("path"),
-  passport = require("passport"),
   jwt = require("express-jwt"),
   authenticationRouter = require("../routes/authentication.server.routes"),
   privRouter = require("../routes/privilege.server.routes"),
@@ -34,8 +32,6 @@ module.exports.init = function() {
 
   // initialize cookie-parser to allow us access the cookies stored in the browser.
   app.use(cookieParser());
-
-  app.use(passport.initialize());
 
   app.use("/api/listings", listingsRouter);
 

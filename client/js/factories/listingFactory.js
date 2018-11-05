@@ -18,6 +18,7 @@ angular.module("listings", []).factory("Listings", function($http) {
         login_listing
       );
     }
+
   };
 
   return methods;

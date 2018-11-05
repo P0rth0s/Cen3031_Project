@@ -9,7 +9,8 @@ var path = require("path"),
   jwt = require("express-jwt"),
   authenticationRouter = require("../routes/authentication.server.routes"),
   privRouter = require("../routes/privilege.server.routes"),
-  listingsRouter = require("../routes/listings.server.routes");
+  listingsRouter = require("../routes/listings.server.routes")
+  profRouter = require("../routes/professor-info.server.routes");
 
 const SECRET = "CHANGE_THIS_TO_ENV_VAR";
 var auth = jwt({
@@ -38,6 +39,8 @@ module.exports.init = function() {
   app.use("/protected", authenticationRouter);
 
   app.use("/priv", privRouter);
+
+  app.use("/api/profssor-info", profRouter)
 
   app.use(express.static("client"));
 

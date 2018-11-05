@@ -1,51 +1,31 @@
-const dash_addr = 'http://localhost:8080/protected/dashboard'
-
-angular.module("listings").controller("ListingsController", [
-  "$scope",
-  "Listings",
+angular.module('listings').controller('ListingsController', ['$scope', 'Listings',
   function($scope, Listings) {
     /* Get all the listings, then bind it to the scope */
-    Listings.getAll().then(
-      function(response) {
-        $scope.listings = response.data;
-        //console.log("response.data: " + response.data);
-      },
-      function(error) {
-        console.log("Unable to retrieve listings:", error);
-      }
-    );
+    Listings.getAll().then(function(response) {
+      $scope.listings = response.data;
+      console.log("response.data: " + response.data);
+    }, function(error) {
+      console.log('Unable to retrieve listings:', error);
+    });
 
     $scope.detailedInfo = undefined;
 
     $scope.addListing = function() {
-      /**
+	  /**
 	  *Save the article using the Listings factory. If the object is successfully
 	  saved redirect back to the list page. Otherwise, display the error
 	 */
-      Listings.create($scope.newListing).then(
-        function(res) {
-          window.location.replace(dash_addr);
-        },
-        function(error) {
-          console.log("Unable to create listing: ", error);
-        }
-      );
-    };
 
-    //check if password is valid.
-    $scope.login = function() {
-      Listings.login($scope.login_listing).then(
-        function(res) {
-          window.location.replace(dash_addr);
-        },
-        function(error) {
-          console.log("Unable to login: ", error);
-        }
-      );
-    };
+     Listings.create($scope.newListing).then(function(res) {
+       res.redirect('/');
+     }, function(error) {
+       res.redirect('/'); //TODO create error page
+       console.log('Unable to create listing: ', error);
+     });
+  };
 
     $scope.deleteListing = function(index) {
-      /**TODO
+	   /**TODO
         Delete the article using the Listings factory. If the removal is successful,
 		navigate back to 'listing.list'. Otherwise, display the error.
        */

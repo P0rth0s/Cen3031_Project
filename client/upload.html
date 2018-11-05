@@ -52,7 +52,7 @@
             </td>
             <tr>
                   <th> Name: </th>
-                  <td> <input type="text" id="form_name" class="form-control form-control-sm" placeholder="Name"></td>
+                  <td> <input type="text" id="form_name" class="form-control form-control-sm" placeholder="Name" ng-model='editableListing.name'></td>
             </tr>
 		<tr>
 		<th>Role</th>
@@ -72,7 +72,7 @@
 <tr ng-repeat="courses in edit.courses">
 	<th>Course {{$index+1}}</th>
 	<td>
-	<input type="text" class="form-control form-control-sm" placeholder="Courses" value={{courses}}>
+	<input type="text" class="form-control form-control-sm" placeholder="Courses" value={{courses}} ng-model='editableListing.courses'>
 	</td>
 </tr>
 <tr><th></th><td><button id="count_up">+</button><button id="count_down">-</button></td>;
@@ -80,7 +80,7 @@
 <tr ng-repeat="hours in edit.office_hours">
 	<th>Period {{$index+1}}</th>
 	<td>
-	<input type="text" class="form-control form-control-sm" placeholder="Period" value={{hours}}>
+	<input type="text" class="form-control form-control-sm" placeholder="Period" value={{hours}} ng-model='editableListing.officeHours'>
 	</td>
 </tr>
 <tr><th></th><td><button id="count_up_hours">+</button><button id="count_down_hours">-</button></td>;
@@ -97,7 +97,7 @@
                   <th></th>
 
                   <td>
-<button type="button" form="edit" id="form_submit" class="btn btn-primary" value="Submit">Update</button>
+<button type="button" form="edit" id="form_submit" class="btn btn-primary" value="Submit" ng-click='update()'>Update</button>
                   <button type="button" id="form_cancel" class="btn btn-danger" value="Cancel">Cancel</button>
 		</td>
             </tr>

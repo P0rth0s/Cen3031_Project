@@ -40,7 +40,7 @@ module.exports.init = function() {
 
   app.use("/priv", privRouter);
 
-  app.use("/api/profssor-info", profRouter)
+  app.use("/api/professor-info", profRouter)
 
   app.use(express.static("client"));
 

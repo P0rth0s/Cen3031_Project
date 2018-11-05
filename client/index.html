@@ -27,6 +27,7 @@
           </div>
           <div class="tableWrapper">
             <table class="table table-striped table-hover">
+<<<<<<< HEAD
               <thead class="thead-dark">
                 <tr>
                   <th><i class="fa fa-graduation-cap"></i> Role</th>
@@ -42,6 +43,19 @@
                 <td>{{listing.name}}</td>
                 <td>{{listing.courses}}</td>
                 <td>
+=======
+              <tr>
+                <th>Role</th>
+                <th>Name</th>
+                <th>Courses</th>
+                <th>Social Media</th>
+              </tr>
+              <tr ng-repeat="listing in listings | filter: query">
+                <td ng-click="showDetails($index)">{{listing.role}}</td>
+                <td ng-click="showDetails($index)">{{listing.name}}</td>
+                <td ng-click="showDetails($index)">{{listing.courses}}</td>
+                <td ng-if="listing.socialMedia">
+>>>>>>> a31c4693237245319696558ed1d655385d3fa63c
                   <div ng-if="listing.socialMedia.twitter">
                     <a href="{{listing.socialMedia.twitter}}">
                         <i class="fa fa-twitter" aria-hidden="true" style="color:#43b8ff"></i>
@@ -58,6 +72,10 @@
                     @{{listing.socialMedia.slack}}
                   </div>
                 </td>
+<<<<<<< HEAD
+=======
+                <td ng-click="deleteListing($index)"><span style="color: red;" class="glyphicon glyphicon-remove"></span></td>
+>>>>>>> a31c4693237245319696558ed1d655385d3fa63c
               </tr>
             </table>
           </div>

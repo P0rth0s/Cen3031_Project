@@ -11,11 +11,38 @@ var mongoose = require('mongoose'),
     };
 
     exports.update = function(req, res) {
-      var editListing = req.body;
-      console.log(editListing.name);
-      console.log(editListing.courses);
-      console.log(editListing.officeHours);
-      return res.send('updated');
+      var listing = req.body;
+      var editListing = {};
+      console.log('listingEmail: ' + listing.email);
+      if(listing.name != undefined) {
+        editListing.name = listing.name;
+      }
+      if(listing.officeHours != undefined) {
+        editListing.office_hours = listing.officeHours;
+      }
+      if(listing.courses != undefined) {
+        editListing.courses = listing.courses;
+      }
+      if(listing.twitter != undefined) {
+        editListing.twitter = listing.twitter;
+      }
+      if(listing.address != undefined) {
+        editListing.address = listing.address;
+      }
+      if(listing.rateProfessor != undefined) {
+        editListing.rateProfessor = listing.rateProfessor;
+      }
+      if(listing.researchAndJobs != undefined) {
+        editListing.researchAndJobs = listing.researchAndJobs;
+      }
+      Listing.update({'email': listing.email}, editListing, { multi: false }, function(err, num) {
+        if(err) {
+          return res.send('err: ' + err);
+        } else {
+          console.log('num updated: ' + num);
+          return res.send('updated');
+        }
+      })
     }
 
     //change to only show for this user and any of their tas

@@ -10,7 +10,11 @@ angular.module('listings').controller('ProfessorInfoController', ['$scope', 'Lis
       console.log('Unable to retrieve listings:', error);
     });
 	*/
+
+  $scope.editableListing = {};
+
   $scope.update = function() {
+    $scope.editableListing.email = $scope.edit.email;
     console.log('update: ' + $scope.editableListing);
     Listings.update($scope.editableListing).then(
       function(res) {

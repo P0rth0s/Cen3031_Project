@@ -14,7 +14,7 @@
     <div class="container">
      <div class="row" ng-controller="ProfessorInfoController">
 
-        <div class="col-md-6">
+        <div class="col-sm-4">
           <div class="input-group" id="searchBar">
             <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-search"></span></span>
             <input type="text" class="form-control form-control-sm" ng-model='query' placeholder="Search">
@@ -29,7 +29,7 @@
             </thead>
 
             <tbody>
-            <tr ng-repeat="listing in listings | filter: query">
+            <tr ng-repeat="listing in listings">
                   <td>{{listing.name}}</td>
 			<td>{{listing.role}}</td>
                   <td><button type="button" class="btn btn-primary" ng-click="editListing(listing.name)">edit</button></td>
@@ -39,16 +39,16 @@
           </div>
         </div>
 
-<!-- Edit form � email and role are indelible because changing those seems like it would cause problems -->
+<!-- Edit form, email and role are indelible -->
 
-<div class="col-md-6" id="form-hidden">
+<div class="col-sm-8" id="form-hidden">
       <form id="edit" method="get">
             <table class="table">
             <th> Edit </th>
             <th></th>
             <tr>
 <th>E-mail: </th>
-                  <td> <input type="text" id="form_email" class="form-control form-control-sm" placeholder="E-mail" ng-init='editableListing.email = edit.email' disabled></td>
+                  <td> <input type="text" id="form_email" class="form-control form-control-sm" placeholder="E-mail" ng-init="editableListing.email=edit.email" disabled></td>
             </td>
             <tr>
                   <th> Name: </th>
@@ -58,8 +58,8 @@
 		<th>Role</th>
 		<td>
 <div class="form-group col-md-6">
-      <select class="form-control" id="form_role" disabled>
-<option value="" selected disabled hidden>Choose�</option>
+      <select class="form-control" id="form_role" style="width:100%" disabled>
+<option value="" selected disabled hidden>Choose...</option>
 	<option value="Instructor">Instructor</option>
 	<option value="TA">TA</option>
       </select>
@@ -69,35 +69,33 @@
 
 <!-- Courses + Hours add input fields as counters increment/decrement -->
 
-<tr ng-repeat="courses in edit.courses">
+<tr ng-repeat="courses in edit.courses track by $index">
 	<th>Course {{$index+1}}</th>
 	<td>
 	<input type="text" class="form-control form-control-sm" placeholder="Courses" value={{courses}} ng-model='editableListing.courses'>
 	</td>
 </tr>
-<tr><th></th><td><button id="count_up">+</button><button id="count_down">-</button></td>;
+<tr><th>Add/Remove Courses</th><td><button id="count_up">+</button><button id="count_down">-</button></td>;
 
-<tr ng-repeat="hours in edit.office_hours">
+<tr ng-repeat="hours in edit.office_hours track by $index">
 	<th>Period {{$index+1}}</th>
 	<td>
 	<input type="text" class="form-control form-control-sm" placeholder="Period" value={{hours}} ng-model='editableListing.officeHours'>
 	</td>
 </tr>
-<tr><th></th><td><button id="count_up_hours">+</button><button id="count_down_hours">-</button></td>;
-
-
+<tr><th>Add/Remove Hours</th><td><button id="count_up_hours">+</button><button id="count_down_hours">-</button></td>;
 </tr>
- <!-- TODO: Replace hours with literally anything less awful
-            <tr>
-                  <th>Hours: </th>
-                  <td> <input type="text" id="form_hours" class="form-control form-control-sm" placeholder="Hours"></td>
-            </tr>
--->
+<tr><th>Address</th><td><input type="text" class="form-control form-control-sm" id="form_address" placeholder="Address" value={{address}} ng-model='editableListing.address'>
+</td></tr>
+<tr><th>Twitter</th><td><input type="text" class="form-control form-control-sm" id="form_twitter" placeholder="Twitter" value={{twitter}} ng-model='editableListing.twitter'>
+	</td>
+</tr>
+<tr><th>Research/Jobs</th><td><textarea class="form-control" style="resize:none" rows="5" id="form_researchAndJobs" ng-model='editableListing.researchAndJobs'></textarea></td>
             <tr>
                   <th></th>
 
                   <td>
-<button type="button" form="edit" id="form_submit" class="btn btn-primary" value="Submit" ng-click='update()'>Update</button>
+<button type="button" form="edit" id="form_submit" ng-click="update()" class="btn btn-primary">Update</button>
                   <button type="button" id="form_cancel" class="btn btn-danger" value="Cancel">Cancel</button>
 		</td>
             </tr>
@@ -113,3 +111,4 @@
     <script src="js/controllers/professor-info.js"></script>
   </body>
 </html>
+

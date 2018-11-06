@@ -17,7 +17,19 @@ angular.module("listings", []).factory("Listings", function($http) {
         "http://localhost:8080/api/listings/login",
         login_listing
       );
+    },
+
+    update: function(editListing) {
+      return $http.post(
+        "http://localhost:8080/api/professor-info/update",
+        editListing
+      );
+    },
+
+    getEditable: function() {
+      return $http.get("http://localhost:8080/api/professor-info");
     }
+
   };
 
   return methods;

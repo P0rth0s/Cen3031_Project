@@ -1,8 +1,16 @@
 #searchBar {
   margin: 15px 10px;
 }
-
 .tableWrapper {
-  max-height: 400px;
   overflow: auto;
+  overflow-x: hidden;
 }
+.tweets > iframe {
+  max-width: 500px !important;
+}
+.navbar-brand {
+  position: relative;
+}
+#form-hidden{
+  display: none;
+} 

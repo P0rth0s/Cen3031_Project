@@ -1,38 +1,43 @@
-angular.module('listings').controller('ListingsController', ['$scope', 'Listings',
-  function($scope, Listings) {
-    /* Get all the listings, then bind it to the scope */
-    Listings.getAll().then(function(response) {
-      $scope.listings = response.data;
-      console.log("response.data: " + response.data);
-    }, function(error) {
-      console.log('Unable to retrieve listings:', error);
-    });
+const dash_addr = 'http://localhost:8080/protected/dashboard'
 
-    $scope.detailedInfo = undefined;
+angular
+	.module("listings")
+	.controller("ListingsController", [
+		"$scope",
+		"Listings",
+		"$http",
+		"$sce",
+		ListingsController
+	]);
 
-    $scope.addListing = function() {
-	  /**
-	  *Save the article using the Listings factory. If the object is successfully
-	  saved redirect back to the list page. Otherwise, display the error
-	 */
+function ListingsController($scope, Listings, $http, $sce) {
+	$scope.detailedInfo = undefined;
 
-     Listings.create($scope.newListing).then(function(res) {
-       res.redirect('/');
-     }, function(error) {
-       res.redirect('/'); //TODO create error page
-       console.log('Unable to create listing: ', error);
-     });
-  };
+	/* Get all the listings, then bind it to the scope */
+	Listings
+		.getAll()
+		.then(function (response) {
+			$scope.listings = response.data.filter(function (listing) {
+				return listing.role !== 'student'
+			});
+			$scope.listings[0].courses.push("test");
+		})
+		.catch(function (error) {
+			console.log("Unable to retrieve listings:", error);
+		});
 
-    $scope.deleteListing = function(index) {
-	   /**TODO
-        Delete the article using the Listings factory. If the removal is successful,
-		navigate back to 'listing.list'. Otherwise, display the error.
-       */
-    };
-
-    $scope.showDetails = function(index) {
-      $scope.detailedInfo = $scope.listings[index];
-    };
-  }
-]);
+	$scope.onDetailedClick = function (username) {
+		if (username) {
+			$http.get('https://publish.twitter.com/oembed', {
+				params: {
+					"url": "https://twitter.com/" + username,
+					"limit": "6",
+					"maxwidth": "500"
+				}
+			}).then(function (resposne) {
+				console.log(resposne)
+				$scope.detailedInfo = $sce.trustAsHtml(resposne.data.html);
+			})
+		}
+	}
+};

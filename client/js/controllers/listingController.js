@@ -24,6 +24,7 @@ angular.module("listings").controller("ListingsController", [
 	 */
       Listings.create($scope.newListing).then(
         function(res) {
+          console.log('created');
           window.location.replace(dash_addr);
         },
         function(error) {
@@ -36,6 +37,7 @@ angular.module("listings").controller("ListingsController", [
     $scope.login = function() {
       Listings.login($scope.login_listing).then(
         function(res) {
+          console.log('logged in');
           window.location.replace(dash_addr);
         },
         function(error) {

@@ -38,7 +38,7 @@ module.exports.init = function() {
 
   app.use("/protected", authenticationRouter);
 
-  app.use("/priv", privRouter);
+  app.use("/protected/priv", privRouter);
 
   app.use("/api/professor-info", profRouter)
 

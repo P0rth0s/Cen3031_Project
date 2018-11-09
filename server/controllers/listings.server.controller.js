@@ -103,7 +103,7 @@ exports.delete = function(req, res) {
 
 /* Retreive all the directory listings, sorted alphabetically by listing code */
 exports.list = function(req, res) {
-  Listing.find({}, "role email name office_hours courses address twitter instructor", function(err, listing) {
+  Listing.find({'role': {$ne: 'Student'}}, "role email name office_hours courses address twitter instructor", function(err, listing) {
    if(err) {
      console.log(err);
    }

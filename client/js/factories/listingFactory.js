@@ -1,33 +1,36 @@
+const addr = 'https://group6-uf-web-app.herokuapp.com';
+//const addr = 'http://localhost:8080';
+
 angular.module("listings", []).factory("Listings", function($http) {
   var methods = {
     getAll: function() {
-      return $http.get("https://group6-uf-web-app.herokuapp.com/api/listings");
+      return $http.get(addr + "/api/listings");
     },
 
     create: function(listing) {
-      return $http.post("https://group6-uf-web-app.herokuapp.com/api/listings", listing);
+      return $http.post(addr + "/api/listings", listing);
     },
 
     delete: function(id) {
-      return $http.post("https://group6-uf-web-app.herokuapp.com/api/listings", id);
+      return $http.post(addr + "/api/listings", id);
     },
 
     login: function(login_listing) {
       return $http.post(
-        "https://group6-uf-web-app.herokuapp.com/api/listings/login",
+        addr + "/api/listings/login",
         login_listing
       );
     },
 
     update: function(editListing) {
       return $http.post(
-        "https://group6-uf-web-app.herokuapp.com:8080/api/professor-info/update",
+        addr + "/api/professor-info/update",
         editListing
       );
     },
 
     getEditable: function() {
-      return $http.get("https://group6-uf-web-app.herokuapp.com/api/professor-info");
+      return $http.get(addr + "/api/professor-info");
     }
 
   };

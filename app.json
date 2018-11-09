@@ -1,0 +1,6 @@
+{
+  "name": "UF office hours web app",
+  "description": "Show UF professor office hours",
+  "repository": "https://github.com/P0rth0s/Cen3031_Project",
+  "keywords": ["node", "express"]
+}

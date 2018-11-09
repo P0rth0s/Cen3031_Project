@@ -58,6 +58,19 @@ module.exports.init = function() {
     res.sendFile(path.join(__dirname + "/../../client/professor-info.html"));
   });
 
+app.get("/courses", function(req, res) {
+	//replace this with whatever page is used to pull
+	//all the courses from ONE.uf
+    res.sendFile(path.join(__dirname + "/../../client/courses.html"));
+});
+
+app.get("/log-out", function(req, res) {
+	//TODO: Remove login token, then redirect to login page?
+	//just redirects to dashboard for now
+     res.redirect('protected/dashboard');
+	//res.redirect('/');
+});
+
   app.get("/", function(req, res) {
     var token = req.cookies.token;
     if(token == undefined) {

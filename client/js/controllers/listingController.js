@@ -4,7 +4,9 @@ const dash_addr = 'https://group6-uf-web-app.herokuapp.com/protected/dashboard'
 angular.module("listings").controller("ListingsController", [
   "$scope",
   "Listings",
-  function($scope, Listings) {
+  "$http",
+  "$sce",
+  function($scope, Listings, $http, $sce) {
     /* Get all the listings, then bind it to the scope */
     Listings.getAll().then(
       function(response) {
@@ -17,6 +19,7 @@ angular.module("listings").controller("ListingsController", [
     );
 
     $scope.detailedInfo = undefined;
+    $scope.detailedTwitter = undefined;
 
     $scope.addListing = function() {
       /**
@@ -54,7 +57,19 @@ angular.module("listings").controller("ListingsController", [
        */
     };
 
-    $scope.showDetails = function(index) {
+    $scope.showDetails = function(index, username) {
+        if (username) {
+  			$http.get('https://publish.twitter.com/oembed', {
+  				params: {
+  					"url": "https://twitter.com/" + username,
+  					"limit": "6",
+  					"maxwidth": "500"
+  				}
+  			}).then(function (resposne) {
+  				console.log(resposne)
+  				$scope.detailedTwitter = $sce.trustAsHtml(resposne.data.html);
+  			})
+  		}
       $scope.detailedInfo = $scope.listings[index];
     };
   }

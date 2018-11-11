@@ -2,6 +2,7 @@
   "name": "cen3031-project",
   "version": "1.0.0",
   "description": "Office Hours website",
+  "repository": "https://github.com/P0rth0s/Cen3031_Project",
   "main": "server.js",
   "author": "Adeel Team 6",
   "license": "MIT",

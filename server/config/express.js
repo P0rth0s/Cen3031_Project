@@ -58,6 +58,13 @@ module.exports.init = function() {
     res.sendFile(path.join(__dirname + "/../../client/professor-info.html"));
   });
 
+
+  app.get("/logout", function(req, res) {
+    res.clearCookie('token', {path:'/'});
+    res.sendFile(path.join(__dirname + "/../../client/login.html"));
+  });
+
+
   app.get("/", function(req, res) {
     var token = req.cookies.token;
     if(token == undefined) {

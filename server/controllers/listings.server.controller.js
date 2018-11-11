@@ -26,6 +26,7 @@ exports.generateJwt = function(listing) {
    return jwt.sign({
      _id: listing._id,
      email: listing.email,
+     role: listing.role,
      name: listing.name,
      exp: parseInt(expiry.getTime() / 1000),
    }, SECRET); // DO NOT KEEP YOUR SECRET IN THE CODE!

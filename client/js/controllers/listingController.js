@@ -18,9 +18,8 @@ function ListingsController($scope, Listings, $http, $sce) {
 		.getAll()
 		.then(function (response) {
 			$scope.listings = response.data.filter(function (listing) {
-				return listing.role !== 'student'
+				return listing.role !== 'Student'
 			});
-			$scope.listings[0].courses.push("test");
 		})
 		.catch(function (error) {
 			console.log("Unable to retrieve listings:", error);
@@ -40,4 +39,16 @@ function ListingsController($scope, Listings, $http, $sce) {
 			})
 		}
 	}
+
+	//check if password is valid.
+	$scope.login = function () {
+		Listings.login($scope.login_listing).then(
+			function (res) {
+				window.location.replace(dash_addr);
+			},
+			function (error) {
+				console.log("Unable to login: ", error);
+			}
+		);
+	};
 };

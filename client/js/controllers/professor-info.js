@@ -85,8 +85,6 @@ angular.module("listings").controller("ProfessorInfoController", [
         endTime: "10:10"
       }
     ];
-    $scope.officeHours = [];
-    $scope.courses = [];
 
     $scope.editableListing = {};
 

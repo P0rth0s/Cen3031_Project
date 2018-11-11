@@ -36,6 +36,7 @@ var listingSchema = new Schema({
   },
   */
   twitter: String,
+  rateProfessor: String,
   researchAndJobs: String,
   instructor: String, //for if ta
   created_at: Date,

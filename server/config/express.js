@@ -9,8 +9,9 @@ var path = require("path"),
   jwt = require("express-jwt"),
   authenticationRouter = require("../routes/authentication.server.routes"),
   privRouter = require("../routes/privilege.server.routes"),
-  listingsRouter = require("../routes/listings.server.routes")
-  profRouter = require("../routes/professor-info.server.routes");
+  listingsRouter = require("../routes/listings.server.routes"),
+  profRouter = require("../routes/professor-info.server.routes"),
+  request = require('request');
 
 const SECRET = "CHANGE_THIS_TO_ENV_VAR";
 var auth = jwt({
@@ -18,7 +19,7 @@ var auth = jwt({
   userProperty: "payload"
 });
 
-module.exports.init = function() {
+module.exports.init = function () {
   //connect to database
   mongoose.connect(config.db.uri);
 
@@ -46,28 +47,42 @@ module.exports.init = function() {
 
   //app.get('/dashboard', auth, ctrlProfile.profileRead);
 
-  app.get("/protected/dashboard", function(req, res) {
+  app.get("/protected/dashboard", function (req, res) {
     res.sendFile(path.join(__dirname + "/../../client/dashboard.html"));
   });
 
-  app.get("/protected/priv/upload", function(req, res) {
+  app.get("/protected/priv/upload", function (req, res) {
     res.sendFile(path.join(__dirname + "/../../client/upload.html"));
   });
 
-  app.get("/test", function(req, res) {
+  app.get("/test", function (req, res) {
     res.sendFile(path.join(__dirname + "/../../client/professor-info.html"));
   });
 
+  app.get("/twitter/:username", function (req, res) {
+    request.get('https://publish.twitter.com/oembed', {
+      qs: {
+        "url": "https://twitter.com/" + req.params.username,
+        "limit": "6",
+        "maxwidth": "500"
+      }
+    }, (function (error, response, body) {
+      res.send(body);
+    }));
+  });
 
-  app.get("/logout", function(req, res) {
-    res.clearCookie('token', {path:'/'});
+
+  app.get("/logout", function (req, res) {
+    res.clearCookie('token', {
+      path: '/'
+    });
     res.sendFile(path.join(__dirname + "/../../client/login.html"));
   });
 
 
-  app.get("/", function(req, res) {
+  app.get("/", function (req, res) {
     var token = req.cookies.token;
-    if(token == undefined) {
+    if (token == undefined) {
       res.sendFile(path.join(__dirname + "/../../client/login.html"));
     } else {
       res.redirect('/protected/dashboard');
@@ -75,7 +90,7 @@ module.exports.init = function() {
   });
 
   /*Go to homepage for all routes not specified */
-  app.get("*", function(req, res) {
+  app.get("*", function (req, res) {
     res.redirect("/");
   });
 

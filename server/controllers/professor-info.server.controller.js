@@ -31,6 +31,7 @@ var mongoose = require('mongoose'),
       }
       if(listing.rateProfessor != undefined) {
         editListing.rateProfessor = listing.rateProfessor;
+        console.log(listing.rateProfessor);
       }
       if(listing.researchAndJobs != undefined) {
         editListing.researchAndJobs = listing.researchAndJobs;

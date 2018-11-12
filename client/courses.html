@@ -30,10 +30,17 @@
               </thead>
 
               <tbody class="panel">
-                <tr ng-repeat-start="course in courses | filter: query" data-toggle="collapse">
+                <tr ng-repeat-start="course in courses" data-toggle="collapse">
                   <td>{{course.code}}</td>
                   <td>{{course.name}}</td>
                 </tr>
+
+                <tr ng-repeat-end class="collapse" id="{{listing._id}}">
+                  <td colspan="4">
+                    <div class="col-md-6 course description"><p>course description</p></div>
+                  </td>
+                </tr>
+
               </tbody>
 
             </table>

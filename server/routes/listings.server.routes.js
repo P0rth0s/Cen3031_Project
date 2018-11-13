@@ -11,8 +11,7 @@ router.route('/')
   .get(listings.list)
   .post(listings.create);
 
-router.route('/courses')
-  .get(listings.getCourses);
+
 /*
   The ':' specifies a URL parameter.
  */

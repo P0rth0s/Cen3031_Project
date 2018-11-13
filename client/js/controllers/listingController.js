@@ -18,6 +18,16 @@ angular.module("listings").controller("ListingsController", [
       }
     );
 
+    Listings.getCourses().then(
+      function (response) {
+        $scope.courses = response.data;
+        //console.log("response.data: " + JSON.stringify(response.data));
+      },
+      function (error) {
+        console.log("Unable to retrieve listings:", error);
+      }
+    );
+
     $scope.detailedInfo = undefined;
     $scope.detailedTwitter = undefined;
 

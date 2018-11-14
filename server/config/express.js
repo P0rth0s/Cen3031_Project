@@ -71,9 +71,6 @@ module.exports.init = function () {
     }));
   });
 
-  app.get("/protected/courses", function(req, res) {
-        res.sendFile(path.join(__dirname + "/../../client/courses.html"));
-  })
 
   app.get("/logout", function (req, res) {
     res.clearCookie('token', {

@@ -31,6 +31,10 @@ angular.module("listings", []).factory("Listings", function ($http) {
 
     getEditable: function () {
       return $http.get(addr + "/api/professor-info");
+    },
+
+    getCourses: function() {
+      return $http.get(addr + "/api/listings/courses");
     }
 
   };

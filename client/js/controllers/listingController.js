@@ -28,6 +28,16 @@ angular.module("listings").controller("ListingsController", [
 
     */
 
+    Listings.getCourses().then(
+      function (response) {
+        $scope.courses = response.data;
+        //console.log("response.data: " + JSON.stringify(response.data));
+      },
+      function (error) {
+        console.log("Unable to retrieve listings:", error);
+      }
+    );
+
     /* Get all the listings, then bind it to the scope */
     Listings.getAll().then(
       function (response) {

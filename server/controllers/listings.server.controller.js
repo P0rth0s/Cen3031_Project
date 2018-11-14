@@ -3,6 +3,7 @@
 var mongoose = require('mongoose'),
     crypto = require('crypto'),
     jwt = require('jsonwebtoken'),
+    request = require('request'),
     Listing = require('../models/listings.server.model.js');
 
 const SECRET = "CHANGE_THIS_TO_ENV_VAR"
@@ -16,6 +17,18 @@ const SECRET = "CHANGE_THIS_TO_ENV_VAR"
   from assignment 3 https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
  */
 
+
+exports.getCourses = function(req, res) {
+   console.log('getting courses');
+
+   request('https://one.ufl.edu/apix/soc/schedule/?category=RES&term=2188&last-control-number=0', function (error, response, body) {
+     if(error) {
+       return res.send(error);
+     }
+     var courses = JSON.parse(body)[0].COURSES;
+     res.send(courses);
+   });
+}
 
 exports.generateJwt = function(listing) {
 

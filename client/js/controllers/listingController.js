@@ -7,6 +7,7 @@ angular.module("listings").controller("ListingsController", [
   "$http",
   "$sce",
   function ($scope, Listings, $http, $sce) {
+    /*
     $scope.marker = null;
 
     const provider = new window.GeoSearch.OpenStreetMapProvider();
@@ -24,6 +25,8 @@ angular.module("listings").controller("ListingsController", [
 
     map.addControl(searchControl);
     map.setView([29.651940, -82.324996], 13);
+
+    */
 
     /* Get all the listings, then bind it to the scope */
     Listings.getAll().then(
@@ -89,11 +92,12 @@ angular.module("listings").controller("ListingsController", [
           query: $scope.detailedInfo.address
         }).then(function (results) {
           console.log(results);
-
+          /*
           $scope.marker = window.L.popup()
             .setLatLng([results[0].y, results[0].x])
             .setContent($scope.detailedInfo.address)
             .openOn(map);
+        */
         });
       }
     };

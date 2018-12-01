@@ -52,15 +52,19 @@ exports.login = function(req, res) {
     if (err) {
       console.log(err);
     } else {
-       var hash = crypto.pbkdf2Sync(login_listing.password, listing.salt, 1000, 64, 'sha512').toString('hex');
-       if(hash == listing.password) {
-         var token = exports.generateJwt(listing);
-         res.status(200);
-         res.setHeader('Set-Cookie','token');
-         res.cookie('token', token, { expires: new Date(Date.now() + 9000000), httpOnly: false });
-         return res.json({"token": token})
+      if(listing != undefined && listing != null) {
+         var hash = crypto.pbkdf2Sync(login_listing.password, listing.salt, 1000, 64, 'sha512').toString('hex');
+         if(hash == listing.password) {
+           var token = exports.generateJwt(listing);
+           res.status(200);
+           res.setHeader('Set-Cookie','token');
+           res.cookie('token', token, { expires: new Date(Date.now() + 9000000), httpOnly: false });
+           return res.json({"token": token})
+         } else {
+           return res.send("There was an error during login. Your password our username was invalid");
+         }
        } else {
-         return res.send("There was an error during login. Your password our username was invalid");
+         return res.send("No account with this username was found");
        }
     }
   });

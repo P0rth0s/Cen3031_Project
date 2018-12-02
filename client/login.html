@@ -3,48 +3,49 @@
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/login.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@0.7.7/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@latest/assets/css/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@0.7.7/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/leaflet-geosearch@2.7.0/dist/bundle.min.js"></script>
+    <link rel="stylesheet" href="styles/main.css">
 
   </head>
   <body ng-app="directoryApp">
 
     
-    <div ng-controller="ListingsController">
-      <div id="map" ng-show="false"></div>
-      <div class="signupbox">
-        <h2>Signup</h2>
-          <form>
-            <p>Email</p>
-            <input type="text" placeholder="Enter Email" ng-model="newListing.email" /><br />
-            <p>Role</p>
-            <select name="role" ng-model="newListing.role">
-            <option value="Student">Student</option>
-          <option value="Professor">Professor</option>
-          <option value="TA">TA</option>
-        </select><br><br>
-            <p>Professor's Email if TA</p>
-            <input type="text" placeholder="Enter Email" ng-model="newListing.instructor" /><br />
-            <p>Password</p>
-            <input type="password" placeholder="Enter Password" ng-model="newListing.password" /><br />
-            <input type="submit" name="" value="Signup" ng-click="addListing()">
-          </form>
-      </div>
+    <div class = "background" ng-controller="ListingsController">
+        
+      <div class="logo"></div>
 
-      <div class="loginbox">
-        <h1>Login</h1>
-        <form novalidate class="simple-form">
-          <p>Email</p>
-          <input type="text" ng-model="login_listing.email" /><br />
-          <p>Password</p>
-          <input type="text" ng-model="login_listing.password" /><br />
-          <input type="submit" name="" value="Login" ng-click="login()">
-        </form>
-      </div>
+        <div class="signupbox">
+          <h2>Signup</h2>
+            <form>
+              <p>Email</p>
+              <input type="text" placeholder="Enter Email" ng-model="newListing.email" /><br />
+              <p>Role</p>
+              <select name="role" ng-model="newListing.role">
+              <option value="Student">Student</option>
+            <option value="Professor">Professor</option>
+            <option value="TA">TA</option>
+          </select><br><br>
+              <p>Professor's Email if TA</p>
+              <input type="text" placeholder="Enter Email" ng-model="newListing.instructor" /><br />
+              <p>Password</p>
+              <input type="password" placeholder="Enter Password" ng-model="newListing.password" /><br />
+              <input type="submit" name="" value="Signup" ng-click="addListing()">
+            </form>
+        </div>
+
+        <div class="loginbox">
+          <h1>Login</h1>
+          <form novalidate class="simple-form">
+            <p>Email</p>
+            <input type="text" placeholder="Enter Email" ng-model="login_listing.email" /><br />
+            <p>Password</p>
+            <input type="password" placeholder="Enter Password" ng-model="login_listing.password" /><br />
+            <input type="submit" name="" value="Login" ng-click="login()">
+          </form>
+        </div>
+
 
     </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
     <script src="https://code.angularjs.org/1.4.3/angular.js"></script>

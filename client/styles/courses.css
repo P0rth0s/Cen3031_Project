@@ -1,41 +1,22 @@
-body  {
-  font-family: sans-serif;
+#searchBar {
+  margin: 15px 10px;
 }
-
-.navbar {
-    background-color: #343a40;
+.tableWrapper {
+  max-height: 400px;
+  overflow: auto;
 }
-
-.navbar a {
-  color: #fff;
+.navbar-brand {
+  position: relative;
 }
-
-.nav {
-  color: #fff;
-  transform: translate(-10%, 0);
-}
-
-.nav li a:hover {
-  color: #FA4616;
-  background-color: transparent;
-}
-
 #form-hidden{
   display: none;
 }
-
-#map {
-  height: 400px;
-  width: 400px;
-}
-
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
 }
-
 
 li {
     float: left;

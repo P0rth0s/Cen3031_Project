@@ -1,8 +1,9 @@
-body	{
-	margin: 0;
-	padding: 0;
-	font-family: sans-serif;
-	background: url(century.jpg) no-repeat center center fixed;
+.background	{
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: url(stadium_edit.jpg) no-repeat center center fixed;
 	background-position: top;
 	background-size: cover; 
     -webkit-background-size: cover;
@@ -10,16 +11,21 @@ body	{
     -o-background-size: cover;
 }
 
-.navbar-default	{
-	background: #000;
-	font-family: sans-serif;
-	font-weight: bold;
+
+.logo	{
+	transform: translateY(-3%);
+	width: 100%;
+	height: 100%;
+	background: url(gator.png) no-repeat;
+	background-position: top-left;
+	background-size: 10%;
+
 }
 
 .loginbox	{
 	width: 320px;
 	height: 360px;
-	background: #343a40;
+	background-color: rgba(52, 58, 64, 0.9);
 	color: #fff;
 	top: 50%;
 	left: 50%;
@@ -28,6 +34,8 @@ body	{
 	box-sizing: border-box;
 	padding: 30px 30px;
 	border-radius: 20px;
+	border-style: solid;
+	border-color: #0021A5;
 }
 
 h1	{
@@ -78,7 +86,7 @@ h1	{
 .signupbox	{
 	width: 320px;
 	height: 520px;
-	background: #343a40;
+	background-color: rgba(52, 58, 64, 0.9);
 	color: #fff;
 	top: 50%;
 	left: 50%;
@@ -87,6 +95,8 @@ h1	{
 	box-sizing: border-box;
 	padding: 30px 30px;
 	border-radius: 20px;
+	border-style: solid;
+	border-color: #0021A5;
 }
 
 h2	{

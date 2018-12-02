@@ -88,12 +88,20 @@ angular.module("listings").controller("ListingsController", [
        */
     };
 
+    $scope.details = false;
+    $scope.tweets = false;
+
     $scope.showDetails = function (index, username) {
+      $scope.details = true;
+
       if (username) {
         $http.get('twitter/' + username).then(function (resposne) {
           console.log(resposne)
           $scope.detailedTwitter = $sce.trustAsHtml(resposne.data.html);
         })
+          $scope.tweets = true;
+      } else  {
+          $scope.tweets = false;
       }
 
       $scope.detailedInfo = $scope.listings[index];

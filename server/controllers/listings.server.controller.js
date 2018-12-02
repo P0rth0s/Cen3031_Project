@@ -16,16 +16,18 @@ const SECRET = "CHANGE_THIS_TO_ENV_VAR"
   HINT: if you are struggling with implementing these functions, refer back to this tutorial
   from assignment 3 https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
  */
+
+
 exports.getCourses = function(req, res) {
-    console.log('getting courses');
-    
-    request('https://one.ufl.edu/apix/soc/schedule/?category=RES&term=2188&last-control-number=0', function (error, response, body) {
-      if(error) {
-        return res.send(error);
-      }
-      var courses = JSON.parse(body)[0].COURSES;
-      res.send(courses);
-    });
+   console.log('getting courses');
+
+   request('https://one.ufl.edu/apix/soc/schedule/?category=RES&term=2188&last-control-number=0', function (error, response, body) {
+     if(error) {
+       return res.send(error);
+     }
+     var courses = JSON.parse(body)[0].COURSES;
+     res.send(courses);
+   });
 }
 
 exports.generateJwt = function(listing) {
@@ -50,15 +52,19 @@ exports.login = function(req, res) {
     if (err) {
       console.log(err);
     } else {
-       var hash = crypto.pbkdf2Sync(login_listing.password, listing.salt, 1000, 64, 'sha512').toString('hex');
-       if(hash == listing.password) {
-         var token = exports.generateJwt(listing);
-         res.status(200);
-         res.setHeader('Set-Cookie','token');
-         res.cookie('token', token, { expires: new Date(Date.now() + 9000000), httpOnly: false });
-         return res.json({"token": token})
+      if(listing != undefined && listing != null) {
+         var hash = crypto.pbkdf2Sync(login_listing.password, listing.salt, 1000, 64, 'sha512').toString('hex');
+         if(hash == listing.password) {
+           var token = exports.generateJwt(listing);
+           res.status(200);
+           res.setHeader('Set-Cookie','token');
+           res.cookie('token', token, { expires: new Date(Date.now() + 9000000), httpOnly: false });
+           return res.json({"token": token})
+         } else {
+           return res.send("There was an error during login. Your password our username was invalid");
+         }
        } else {
-         return res.send("There was an error during login. Your password our username was invalid");
+         return res.send("No account with this username was found");
        }
     }
   });

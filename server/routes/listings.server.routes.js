@@ -11,8 +11,9 @@ router.route('/')
   .get(listings.list)
   .post(listings.create);
 
-router.route('/courses')
-  .get(listings.getCourses);
+  router.route('/courses')
+    .get(listings.getCourses);
+
 /*
   The ':' specifies a URL parameter.
  */
@@ -23,6 +24,7 @@ router.route('/:listingId')
 
 router.route('/login')
   .post(listings.login);
+
 /*
   The 'router.param' method allows us to specify middleware we would like to use to handle
   requests with a parameter.

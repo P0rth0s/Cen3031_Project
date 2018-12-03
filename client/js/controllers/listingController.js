@@ -1,5 +1,5 @@
-const dash_addr = 'https://group6-uf-web-app.herokuapp.com/protected/dashboard'
-//const dash_addr = 'http://localhost:8080/protected/dashboard'
+//const dash_addr = 'https://group6-uf-web-app.herokuapp.com/protected/dashboard'
+const dash_addr = 'http://localhost:8080/protected/dashboard'
 
 angular.module("listings").controller("ListingsController", [
   "$scope",
@@ -99,9 +99,9 @@ angular.module("listings").controller("ListingsController", [
           console.log(resposne)
           $scope.detailedTwitter = $sce.trustAsHtml(resposne.data.html);
         })
-          $scope.tweets = true;
-      } else  {
-          $scope.tweets = false;
+        $scope.tweets = true;
+      } else {
+        $scope.tweets = false;
       }
 
       $scope.detailedInfo = $scope.listings[index];

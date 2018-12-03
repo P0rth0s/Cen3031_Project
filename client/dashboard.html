@@ -29,8 +29,20 @@
             <h3>{{detailedInfo.name}}</h3>
             <p>Role:<br>{{detailedInfo.role}}</p>
             <p>Email:<br>{{detailedInfo.email}}</p>
-            <p>Office Hours:<br><span ng-repeat="course in detailedInfo.office_hours">{{course}}</span></p>
-            <p>Courses:<br><span ng-repeat="course in detailedInfo.courses">{{course}}</span></p>
+            <p>Office Hours:<br>
+              <span ng-repeat="hour in detailedInfo.office_hours">
+                <span ng-repeat="test in hour">
+                  {{test.begin}}<br>
+                </span>
+              </span>
+            </p>
+            <p>Courses:<br>
+              <span ng-repeat="courseObj in detailedInfo.courses">
+                  <span ng-repeat="course in courseObj">
+                    {{course}}<br>
+                  </span>
+              </span>
+            </p>
             <p>Twitter:<br>{{detailedInfo.twitter}}</p>
             <p>Rate My Professor:<br>{{detailedInfo.rateProfessor}}</p>
             <p>Research and Jobs:<br>{{detailedInfo.researchAndJobs}}</p>
@@ -61,7 +73,9 @@
                       <td>{{listing.role}}</td>
                       <td>{{listing.name}}</td>
                       <td>
-                        <span ng-repeat="course in listing.courses">{{course}}<br></span>
+                        <span ng-repeat="course in listing.courses">
+                          <span ng-repeat="test in course">{{test}}<br></span>
+                        </span>
                       </td>
                     </tr>
                     <tr ng-repeat-end class="collapse" id="{{listing._id}}">

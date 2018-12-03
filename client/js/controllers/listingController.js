@@ -7,6 +7,7 @@ angular.module("listings").controller("ListingsController", [
   "$http",
   "$sce",
   function ($scope, Listings, $http, $sce) {
+
     $scope.marker = null;
 
     const provider = new window.GeoSearch.OpenStreetMapProvider();
@@ -24,6 +25,18 @@ angular.module("listings").controller("ListingsController", [
 
     map.addControl(searchControl);
     map.setView([29.651940, -82.324996], 13);
+
+
+
+    Listings.getCourses().then(
+      function (response) {
+        $scope.courses = response.data;
+        //console.log("response.data: " + JSON.stringify(response.data));
+      },
+      function (error) {
+        console.log("Unable to retrieve listings:", error);
+      }
+    );
 
     /* Get all the listings, then bind it to the scope */
     Listings.getAll().then(
@@ -75,12 +88,20 @@ angular.module("listings").controller("ListingsController", [
        */
     };
 
+    $scope.details = false;
+    $scope.tweets = false;
+
     $scope.showDetails = function (index, username) {
+      $scope.details = true;
+
       if (username) {
         $http.get('twitter/' + username).then(function (resposne) {
           console.log(resposne)
           $scope.detailedTwitter = $sce.trustAsHtml(resposne.data.html);
         })
+        $scope.tweets = true;
+      } else {
+        $scope.tweets = false;
       }
 
       $scope.detailedInfo = $scope.listings[index];
@@ -88,8 +109,7 @@ angular.module("listings").controller("ListingsController", [
         const results = provider.search({
           query: $scope.detailedInfo.address
         }).then(function (results) {
-          console.log(results);
-
+          //console.log(results);
           $scope.marker = window.L.popup()
             .setLatLng([results[0].y, results[0].x])
             .setContent($scope.detailedInfo.address)

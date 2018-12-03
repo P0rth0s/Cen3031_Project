@@ -4,17 +4,23 @@
     <base href="/" />
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/courses.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@0.7.7/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@latest/assets/css/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@0.7.7/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-geosearch@2.7.0/dist/bundle.min.js"></script>
   </head>
   <body ng-app="directoryApp">
-    <nav class="navbar navbar-default navbar-fixed-top navbar-dark bg-dark">
+    <div id="map" ng-show="false"></div>
+    <nav class="navbar navbar-fixed-top">
       <a class="navbar-brand" href>
         UF OFFICE HOURS
       </a>
-      <ul>
-      <li><a href="https://group6-uf-web-app.herokuapp.com/protected/dashboard">Dashboard</a></li>
-      <li><a href="https://group6-uf-web-app.herokuapp.com/protected/priv/upload">Admin</a></li>
-      <li><a href="https://group6-uf-web-app.herokuapp.com/logout">Logout</a></li>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://group6-uf-web-app.herokuapp.com/protected/dashboard">DASHBOARD</a></li>
+        <li><a href="https://group6-uf-web-app.herokuapp.com/protected/priv/upload">ADMIN</a></li>
+        <li><a href="https://group6-uf-web-app.herokuapp.com/logout">LOGOUT</a></li>
       </ul>
     </nav>
     <div class="container" style="margin-top: 75px">

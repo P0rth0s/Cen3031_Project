@@ -1,0 +1,40 @@
+.table	{
+	max-height: 400px;
+	overflow: scroll;
+}
+
+.middle p {
+	transform: translateX(25%);
+}
+
+.search	{
+	margin-top: 75px;
+}
+
+.info 	{	
+	position: relative;
+
+}
+
+.detailed	{
+	width: 500px;
+	height: auto;
+	background: #e9ecef;	
+	border-radius: 10px;
+	font-size: 20px;
+	margin-top: 75px;
+	padding: 10px;
+}
+
+h3	{
+	font-weight: bold;
+}
+
+.tweets	{
+	margin-top: 75px;
+	overflow: hide;
+}
+
+#map {
+	transform: translateX(10%);
+}

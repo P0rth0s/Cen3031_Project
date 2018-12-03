@@ -59,6 +59,10 @@ module.exports.init = function () {
     res.sendFile(path.join(__dirname + "/../../client/professor-info.html"));
   });
 
+  app.get("/protected/courses", function(req, res) {
+        res.sendFile(path.join(__dirname + "/../../client/courses.html"));
+  })
+
   app.get("/twitter/:username", function (req, res) {
     request.get('https://publish.twitter.com/oembed', {
       qs: {

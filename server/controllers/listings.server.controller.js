@@ -30,21 +30,21 @@ exports.getCourses = function (req, res) {
     console.log("getting courses");
 
     //sanitize data by replacing missing keys with empty strings
-    if (!req.data.courseCode) {
-        req.data.courseCode = "";
+    if (!req.query.courseCode) {
+        req.query.courseCode = "";
     }
-    if (!req.data.courseTitle) {
-        req.data.courseTitle = "";
+    if (!req.query.courseTitle) {
+        req.query.courseTitle = "";
     }
-    if (!req.data.startingFrom) {
-        req.data.startingFrom = 0;
+    if (!req.query.startingFrom) {
+        req.query.startingFrom = 0;
     }
 
     request(
         `https://one.ufl.edu/apix/soc/schedule/?category=RES&term=2188` +
-        `&last-control-number=${req.data.startingFrom}` +
-        `&course-code=${req.data.courseCode}` +
-        `&course-title=${req.data.courseTitle}`,
+        `&last-control-number=${req.query.startingFrom}` +
+        `&course-code=${req.query.courseCode}` +
+        `&course-title=${req.query.courseTitle}`,
         function (error, response, body) {
             if (error) {
                 return res.send(error);

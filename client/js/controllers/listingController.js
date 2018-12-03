@@ -26,8 +26,6 @@ angular.module("listings").controller("ListingsController", [
     map.addControl(searchControl);
     map.setView([29.651940, -82.324996], 13);
 
-
-
     Listings.getCourses().then(
       function (response) {
         $scope.courses = response.data;

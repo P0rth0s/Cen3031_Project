@@ -1,5 +1,5 @@
-const addr = 'https://group6-uf-web-app.herokuapp.com';
-//const addr = 'http://localhost:8080';
+//const addr = 'https://group6-uf-web-app.herokuapp.com';
+const addr = 'http://localhost:8080';
 
 angular.module("listings", []).factory("Listings", function ($http) {
   var methods = {

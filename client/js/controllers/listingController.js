@@ -28,7 +28,7 @@ angular.module("listings").controller("ListingsController", [
 
     Listings.getCourses().then(
       function (response) {
-        $scope.courses = response.data;
+        $scope.data = response.data;
         //console.log("response.data: " + JSON.stringify(response.data));
       },
       function (error) {
@@ -114,6 +114,27 @@ angular.module("listings").controller("ListingsController", [
             .openOn(map);
         });
       }
+    };
+
+    //search functionality
+    $scope.search = { courseCode: "", courseTitle: "" };
+    $scope.lastSearch = { courseCode: "", courseTitle: "" };
+
+    $scope.getSearchCourses = function () {
+      $scope.lastSearch = $scope.search;
+      $scope.getNextCourses(0);
+    }
+
+    $scope.getNextCourses = function(startingFrom) {
+      Listings.getCourses({
+        courseCode: $scope.search.courseCode,
+        courseTitle: $scope.search.courseTitle,
+        startingFrom
+      }).then(res => {
+          $scope.data = res.data;
+        }, err => {
+          console.log("Unable to retrieve listings:", err);
+        }); 
     };
   }
 ]);

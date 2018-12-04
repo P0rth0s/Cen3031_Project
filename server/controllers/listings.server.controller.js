@@ -21,7 +21,7 @@ the data object is as follows:
 {
     courseCode: string;
     courseTitle: string;
-    startingFrom: number;
+    startingFrom: string;
 }
 
 the api doc for this request is at https://github.com/Rolstenhouse/uf_api#courses
@@ -37,7 +37,7 @@ exports.getCourses = function (req, res) {
         req.query.courseTitle = "";
     }
     if (!req.query.startingFrom) {
-        req.query.startingFrom = 0;
+        req.query.startingFrom = "0";
     }
 
     request(
@@ -49,8 +49,7 @@ exports.getCourses = function (req, res) {
             if (error) {
                 return res.send(error);
             }
-            var courses = JSON.parse(body)[0].COURSES;
-            res.send(courses);
+            res.send(JSON.parse(body)[0]);
         }
     );
 };

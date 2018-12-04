@@ -94,13 +94,24 @@
               </tbody>
             </table>
           </div>
-          <button
-            type="button"
-            class="btn btn-primary"
-            ng-click="getNextCourses(data.LASTCONTROLNUMBER)"
-          >
-            Get more courses
-          </button>
+          <form class="form-inline">
+            <button
+              type="button"
+              class="btn btn-primary"
+              ng-if="!isFirstPage()"
+              ng-click="getPreviousCourses()"
+            >
+              Get prev courses
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              ng-if="!isLastPage()"
+              ng-click="getNextCourses()"
+            >
+              Get next courses
+            </button>
+          </form>
         </div>
       </div>
     </div>

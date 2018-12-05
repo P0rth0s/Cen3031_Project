@@ -165,5 +165,15 @@ angular.module("listings").controller("ListingsController", [
         }
       );
     };
+
+
+    $scope.courseDetails = false;
+    $scope.detailedCourseInfo = undefined;
+
+    $scope.showCourseDetails = function(index) {
+      $scope.courseDetails = true;
+      $scope.detailedCourseInfo = $scope.data.COURSES[index];
+
+    };
   }
 ]);

@@ -28,15 +28,10 @@
       <a class="navbar-brand" href> UF OFFICE HOURS </a>
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a href="https://group6-uf-web-app.herokuapp.com/protected/dashboard"
-            >DASHBOARD</a
-          >
+          <a href="https://group6-uf-web-app.herokuapp.com/protected/dashboard">DASHBOARD</a>
         </li>
         <li>
-          <a
-            href="https://group6-uf-web-app.herokuapp.com/protected/priv/upload"
-            >ADMIN</a
-          >
+          <a href="https://group6-uf-web-app.herokuapp.com/protected/priv/upload">ADMIN</a>
         </li>
         <li>
           <a href="https://group6-uf-web-app.herokuapp.com/logout">LOGOUT</a>
@@ -79,6 +74,7 @@
                 <tr
                   ng-repeat-start="course in data.COURSES"
                   data-toggle="collapse"
+                  ng-click="showCourseDetails($index)"
                 >
                   <td>{{ course.code }}</td>
                   <td>{{ course.name }}</td>
@@ -113,6 +109,35 @@
             </button>
           </form>
         </div>
+
+        <div class="message">
+          <p ng-show="!courseDetails"> Click on an entry for additional info. </p>
+        </div>
+
+        <div class="col-md-12"> 
+           <div class="detailed" ng-show="courseDetails">
+            <h3>{{detailedCourseInfo.name}}</h3>
+            <p>{{detailedCourseInfo.description}}</p>
+            <p>Code:<br>{{detailedCourseInfo.code}}</p>           
+            <p>Sections/Instructors/Meet Times:<br>
+              <span ng-repeat="sect in detailedCourseInfo.sections">
+                  {{sect.number}}<br>
+                  <span ng-repeat="instructor in sect.instructors">
+                    {{instructor.name}}<br>
+                  </span>
+                  <span class="meets" ng-repeat="meet in sect.meetTimes">
+                    <span ng-repeat="meetDay in meet.meetDays">
+                          {{meetDay}} 
+                    </span><br>
+                        {{meet.meetTimeBegin}} - {{meet.meetTimeEnd}}<br>
+                  </span>
+              </span>
+
+          </div> 
+        </div>
+
+
+
       </div>
     </div>
 
